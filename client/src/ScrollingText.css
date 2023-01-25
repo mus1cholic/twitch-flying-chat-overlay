@@ -1,0 +1,21 @@
+.scroll-text {
+  white-space: nowrap;
+  overflow: hidden;
+  color: rgba(255, 0, 0, 1);
+}
+
+.scroll-text.animated {
+  /* animation: scroll-left 10s linear infinite; */
+  animation: scroll-left 10s linear;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(100%);
+    transform: translateY(50%);
+  }
+  to {
+    transform: translateX(-100%);
+    transform: translateY(50%);
+  }
+}
