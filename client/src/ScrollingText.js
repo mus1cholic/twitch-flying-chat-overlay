@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+// helper function to get random integer between min and max
 const getRandom = (min, max) => {
   return Math.random() * (max - min) + min;
 }
@@ -21,22 +22,18 @@ const ScrollingText = (text) => {
       setFinished(true);
       return;
     }
+
     intervalId = setInterval(() => {
       setTextPos(textPos => textPos - getRandom(5, 10)); // TODO: variable speeds based on length
       if (textPos < 0 - (textLength * 2)) {
         clearInterval(intervalId);
-        // setFinished(true);
       }
     }, 10);
   
     return () => {
       clearInterval(intervalId);
-      // setFinished(true);
     };
   }, [textPos]);
-
-  // console.log(textPos);
-  // console.log(finished);
 
   return (
     !finished ?
