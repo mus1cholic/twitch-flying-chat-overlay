@@ -1,11 +1,7 @@
-import React from "react";
-// import axios from 'axios';
-// import logo from './logo.svg';
-import openSocket from 'socket.io-client';
-import './App.css';
-import ScrollingText from "./ScrollingText";
+import React from 'react';
 
-// import {useRef} from "react";
+import openSocket from 'socket.io-client';
+import ScrollingText from './ScrollingText';
 
 function App() {
   const socket = openSocket('http://localhost:3000');
