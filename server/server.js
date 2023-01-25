@@ -6,28 +6,18 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+const badWords = require('bad-words')
 
-// Function to update the data
+const badWordsFilter = new badWords();
+
 const updateData = (newData) => {
-  data = newData;
+  data.message = badWordsFilter.clean(newData.message);
   io.emit('data', data);
 }
 
 let data = {
   message: "default"
 };
-
-// io.on('connection', socket => {
-//   socket.emit('data', data);
-// });
-
-// app.get('/api/data', (req, res) => {
-//   res.json(data);
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server listening on ${PORT}`);
-// });
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
