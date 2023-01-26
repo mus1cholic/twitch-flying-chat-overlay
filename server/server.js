@@ -85,7 +85,7 @@ function updateData(newData) {
 }
 
 server.listen(CONSTANTS.PORT, () => {
-  console.log(`Server running on port ${CONSTANTS.PORT}`);
+  console.log(`Server started! Running on port ${CONSTANTS.PORT}`);
 });
 
 const client = new tmi.Client({
