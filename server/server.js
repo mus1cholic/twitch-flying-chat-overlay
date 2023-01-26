@@ -1,18 +1,15 @@
-const CONSTANTS = require('./consts');
+const CONSTANTS = require("./consts");
 const config = require("../config.json");
 
-const tmi = require('tmi.js');
-
+const tmi = require("tmi.js");
 const badWords = require("bad-words");
 const express = require("express");
-
-
 
 const badWordsFilter = new badWords();
 
 const app = express();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require("socket.io")(server);
 
 let data = {
   message: "default"
