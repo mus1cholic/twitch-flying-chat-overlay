@@ -9,23 +9,23 @@ function App() {
 
   React.useEffect(() => {
     socket.on('data', data => {
-      console.log("recieved");
-      // setMsgs(prevMsgs => [...prevMsgs, data.message]);
       setMsgs(prevMsgs => [...prevMsgs, {
         message: data.message,
-        color: data.color
+        color: data.color,
+        // y: data.y,
+        scrollSpeed: data.scrollSpeed
       }]);
     });
 
     return () => {
       socket.off('data');
     }
-  }, []);
+  }, [socket]);
 
   return (
     <div>
       {msgs.map((obj, index) => (
-        <ScrollingText key={index} text={obj.message} color={obj.color}>
+        <ScrollingText key={index} text={obj.message} color={obj.color} y={obj.y} scrollSpeed={obj.scrollSpeed}>
         </ScrollingText>
       ))}
     </div>

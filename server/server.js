@@ -15,6 +15,11 @@ let data = {
   message: "default"
 };
 
+// helper function to get random integer between min and max
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 function determineEmoji(msg) {
   // courtesy of https://medium.com/reactnative/emojis-in-javascript-f693d0eb79fb
   return CONSTANTS.EMOJI_MATCH_REGEX.test(msg);
@@ -49,10 +54,15 @@ function returnColor(ctx) {
   }
 }
 
+function returnY() {
+  // TODO: implement this
+  return -1;
+}
+
 function updateData(newData) {
-  user = newData.user;
-  msg = newData.message;
-  ctx = newData.context;
+  const user = newData.user;
+  const msg = newData.message;
+  const ctx = newData.context;
 
   // various checks
   if (determineEmoji(msg)) return;
@@ -60,11 +70,15 @@ function updateData(newData) {
   if (determineLink(msg)) return;
   if (determineBotMessage(user)) return;
 
-  color = returnColor(ctx);
+  const color = returnColor(ctx);
+  const y = returnY();
+  const scrollSpeed = getRandom(7, 10);
 
   data = {
     message: badWordsFilter.clean(msg),
-    color: color
+    color: color,
+    y: y,
+    scrollSpeed: scrollSpeed
   }
 
   io.emit('data', data);
