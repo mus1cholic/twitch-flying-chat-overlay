@@ -1,8 +1,8 @@
-# Twitch Flying Chat Overlay v0.6.3
+# Twitch Flying Chat Overlay v0.6.4
 
 Insert gif here
 
-A streaming overlay to display chat that scrolls horizontally, akin to niconico and bilibili
+A streaming overlay to display chat that scrolls horizontally, similar to niconico and bilibili
 
 Building Instructions:
 
@@ -15,13 +15,13 @@ Have two terminal windows open, one for starting the server and one for the clie
 
 For terminal 1:
 - `cd` into this repository
-- `cd/server`
+- `cd server`
 - `npm start`
 - Make sure `Server start! Running on port 3001` is shown, and leave the terminal window alone
 
 For terminal 2:
 - `cd` into this repository
-- `cd/client`
+- `cd client`
 - `npm start`
 - Make sure `Compiled successfully!` is shown, and leave the terminal window alone. You can close the browser window
 
