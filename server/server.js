@@ -1,26 +1,50 @@
-// server/index.js
+const CONSTANTS = require('./consts');
 
-const express = require("express");
 const tmi = require('tmi.js');
-const PORT = process.env.PORT || 3001;
-const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-const badWords = require('bad-words')
+
+const badWords = require("bad-words");
+const express = require("express");
 
 const badWordsFilter = new badWords();
 
-const updateData = (newData) => {
-  data.message = badWordsFilter.clean(newData.message);
-  io.emit('data', data);
-}
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 let data = {
   message: "default"
 };
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+function determineEmoji(str) {
+  // courtesy of https://medium.com/reactnative/emojis-in-javascript-f693d0eb79fb
+  return CONSTANTS.EMOJI_MATCH_REGEX.test(str);
+}
+
+function determineLink(str) {
+  // TODO: implement this
+  return false;
+}
+
+function determineBotMessage(data) {
+  // TODO: implement this
+  return false;
+}
+
+function updateData(newData) {
+  msg = newData.message;
+
+  if (determineEmoji(msg)) return;
+  if (determineLink(msg)) return;
+  if (determineBotMessage(newData)) return;
+  // TODO: parse bot messages
+
+  data.message = badWordsFilter.clean(newData.message);
+  console.log(data);
+  io.emit('data', data);
+}
+
+server.listen(CONSTANTS.PORT, () => {
+  console.log(`Server running on port ${CONSTANTS.PORT}`);
 });
 
 const client = new tmi.Client({
@@ -28,7 +52,7 @@ const client = new tmi.Client({
     reconnect: true
   },
   channels: [
-    'kurumii_osu'
+    'kurumii_osu' // TODO: generalize this in config file
   ]
 });
 
