@@ -1,4 +1,6 @@
-# Twitch Horizontal-Scrolling Chat Overlay v0.6.2
+# Twitch Flying Chat Overlay v0.6.3
+
+Insert gif here
 
 A streaming overlay to display chat that scrolls horizontally, akin to niconico and bilibili
 
