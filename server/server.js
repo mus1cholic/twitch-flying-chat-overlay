@@ -1,11 +1,12 @@
 const CONSTANTS = require('./consts');
+const config = require("../config.json");
 
 const tmi = require('tmi.js');
 
 const badWords = require("bad-words");
 const express = require("express");
 
-import config from "../config.json";
+
 
 const badWordsFilter = new badWords();
 
@@ -27,6 +28,10 @@ function determineLink(str) {
   return false;
 }
 
+function determineCommand(str) {
+  return str == "" || str[0] == '!';
+}
+
 function determineBotMessage(user) {
   user = user.toLowerCase()
 
@@ -38,11 +43,11 @@ function updateData(newData) {
   msg = newData.message;
 
   if (determineEmoji(msg)) return;
+  if (determineCommand(msg)) return;
   if (determineLink(msg)) return;
   if (determineBotMessage(user)) return;
 
   data.message = badWordsFilter.clean(newData.message);
-  console.log(data);
   io.emit('data', data);
 }
 
@@ -58,11 +63,11 @@ const client = new tmi.Client({
 client.connect();
 
 client.on('message', async (channel, context, message) => {
-  console.log('channel', {
-    channel,
-    user: context.username,
-    message
-  });
+  console.log(context);
 
-  updateData({ message: message });
+  updateData({
+    user: context.username,
+    message: message,
+    context: context
+  });
 });
