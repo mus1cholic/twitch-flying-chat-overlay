@@ -35,16 +35,38 @@ function determineBotMessage(user) {
   return config.bots.includes(user);
 }
 
+function returnColor(ctx) {
+  if (ctx.badges != null && "broadcaster" in ctx.badges) {
+    return CONSTANTS.RED_COLOR;
+  } else if (ctx.mod) {
+    return CONSTANTS.GREEN_COLOR;
+  } else if (ctx.vip) { // this is so weird, returns undefined but i guess it works in this case
+    return CONSTANTS.PINK_COLOR;
+  } else if (ctx.subscriber) {
+    return CONSTANTS.PURPLE_COLOR;
+  } else {
+    return CONSTANTS.GRAY_COLOR;
+  }
+}
+
 function updateData(newData) {
   user = newData.user;
   msg = newData.message;
+  ctx = newData.context;
 
+  // various checks
   if (determineEmoji(msg)) return;
   if (determineCommand(msg)) return;
   if (determineLink(msg)) return;
   if (determineBotMessage(user)) return;
 
-  data.message = badWordsFilter.clean(newData.message);
+  color = returnColor(ctx);
+
+  data = {
+    message: badWordsFilter.clean(msg),
+    color: color
+  }
+
   io.emit('data', data);
 }
 

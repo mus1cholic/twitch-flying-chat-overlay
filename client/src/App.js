@@ -10,7 +10,11 @@ function App() {
   React.useEffect(() => {
     socket.on('data', data => {
       console.log("recieved");
-      setMsgs(prevMsgs => [...prevMsgs, data.message]);
+      // setMsgs(prevMsgs => [...prevMsgs, data.message]);
+      setMsgs(prevMsgs => [...prevMsgs, {
+        message: data.message,
+        color: data.color
+      }]);
     });
 
     return () => {
@@ -20,10 +24,9 @@ function App() {
 
   return (
     <div>
-      {msgs.map((text, index) => (
-          <ScrollingText key={index}>
-            {text}
-          </ScrollingText>
+      {msgs.map((obj, index) => (
+        <ScrollingText key={index} text={obj.message} color={obj.color}>
+        </ScrollingText>
       ))}
     </div>
   );

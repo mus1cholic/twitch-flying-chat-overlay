@@ -5,7 +5,10 @@ const getRandom = (min, max) => {
   return Math.random() * (max - min) + min;
 }
 
-const ScrollingText = (text) => {
+const ScrollingText = (props) => {
+  const text = props.text;
+  const color = props.color;
+
   // TODO: make text not overlap with each other
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const textLength = text.length;
@@ -37,8 +40,8 @@ const ScrollingText = (text) => {
 
   return (
     !finished ?
-    <div style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'absolute', left: textPos, top: textY, fontSize: 100, color: 'white'}}>
-      {text.children}
+    <div style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'absolute', left: textPos, top: textY, fontSize: 80, color: color}}>
+      {text}
     </div>
     : null
   );
