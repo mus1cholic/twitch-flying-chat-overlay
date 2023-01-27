@@ -30,4 +30,5 @@ In OBS:
 - Name it whatever
 - In the URL, put in: `localhost:3000`
 - Check "Use custom frame rate" and put `60`
+- **Very Important!!** Check "Refresh browser when scene becomes active"
 - Click "Refresh cache of current page" everytime you hit a problem should solve most issues
