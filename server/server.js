@@ -40,6 +40,14 @@ function determineBotMessage(user) {
   return config.bots.includes(user);
 }
 
+function filterBadWords(msg) {
+  if (/\b/.exec(msg) == null) {
+    return msg;
+  }
+
+  return badWordsFilter.clean(msg);
+}
+
 function returnColor(ctx) {
   if (ctx.badges != null && "broadcaster" in ctx.badges) {
     return CONSTANTS.RED_COLOR;
@@ -70,12 +78,13 @@ function updateData(newData) {
   if (determineLink(msg)) return;
   if (determineBotMessage(user)) return;
 
+  const msgFiltered = filterBadWords(msg);
   const color = returnColor(ctx);
   const y = returnY();
   const scrollSpeed = getRandom(7, 10);
 
   data = {
-    message: badWordsFilter.clean(msg),
+    message: msgFiltered,
     color: color,
     y: y,
     scrollSpeed: scrollSpeed
