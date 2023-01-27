@@ -87,7 +87,8 @@ function updateData(newData) {
     message: msgFiltered,
     color: color,
     y: y,
-    scrollSpeed: scrollSpeed
+    scrollSpeed: scrollSpeed,
+    config: config
   }
 
   io.emit("data", data);

@@ -1,4 +1,4 @@
-# Twitch Flying Chat Overlay v0.7.2
+# Twitch Flying Chat Overlay v0.7.3
 
 Insert gif here
 

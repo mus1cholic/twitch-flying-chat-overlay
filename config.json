@@ -4,5 +4,6 @@
     ],
     "bots": [
         "nightbot"
-    ]
+    ],
+    "text_size": "80"
 }

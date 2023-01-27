@@ -13,7 +13,8 @@ function App() {
         message: data.message,
         color: data.color,
         // y: data.y,
-        scrollSpeed: data.scrollSpeed
+        scrollSpeed: data.scrollSpeed,
+        config: data.config
       }]);
     });
 
@@ -25,7 +26,7 @@ function App() {
   return (
     <div>
       {msgs.map((obj, index) => (
-        <ScrollingText key={index} text={obj.message} color={obj.color} y={obj.y} scrollSpeed={obj.scrollSpeed}>
+        <ScrollingText key={index} text={obj.message} color={obj.color} y={obj.y} scrollSpeed={obj.scrollSpeed} config={obj.config}>
         </ScrollingText>
       ))}
     </div>
