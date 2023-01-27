@@ -25,9 +25,9 @@ function determineEmoji(msg) {
   return CONSTANTS.EMOJI_MATCH_REGEX.test(msg);
 }
 
-function determineLink(str) {
-  // TODO: implement this
-  return false;
+function determineLink(msg) {
+  // courtesy of https://github.com/component/regexps/blob/master/index.js#L3
+  return CONSTANTS.URL_MATCH_REGEX.test(msg);
 }
 
 function determineCommand(str) {
@@ -45,7 +45,7 @@ function returnColor(ctx) {
     return CONSTANTS.RED_COLOR;
   } else if (ctx.mod) {
     return CONSTANTS.GREEN_COLOR;
-  } else if (ctx.vip) { // this is so weird, returns undefined but i guess it works in this case
+  } else if (ctx.vip) {
     return CONSTANTS.PINK_COLOR;
   } else if (ctx.subscriber) {
     return CONSTANTS.PURPLE_COLOR;
@@ -81,7 +81,7 @@ function updateData(newData) {
     scrollSpeed: scrollSpeed
   }
 
-  io.emit('data', data);
+  io.emit("data", data);
 }
 
 server.listen(CONSTANTS.PORT, () => {

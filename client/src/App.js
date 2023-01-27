@@ -8,7 +8,7 @@ function App() {
   const [msgs, setMsgs] = React.useState([]);
 
   React.useEffect(() => {
-    socket.on('data', data => {
+    socket.on('data', (data) => {
       setMsgs(prevMsgs => [...prevMsgs, {
         message: data.message,
         color: data.color,
@@ -20,7 +20,7 @@ function App() {
     return () => {
       socket.off('data');
     }
-  }, [socket]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
