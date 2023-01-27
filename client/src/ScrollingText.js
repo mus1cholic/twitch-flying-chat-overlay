@@ -37,7 +37,7 @@ const ScrollingText = (props) => {
 
   return (
     !finished ?
-    <div style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'absolute', left: textPos, top: textY, fontSize: 80, color: color}}>
+    <div style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'absolute', left: textPos, top: textY, fontSize: 80, color: color, fontWeight: "bold"}}>
       {text}
     </div>
     : null
